@@ -1,4 +1,4 @@
-# Doce Sabor — Loja Virtual
+# Doce Doces e Sabor — Loja Virtual
 
 Site de uma loja virtual de doces artesanais, desenvolvido em **React** com componentes separados e reutilizáveis, ligado a um **backend em Node.js** que guarda os dados em um banco **MySQL** hospedado.
 
