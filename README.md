@@ -4,8 +4,6 @@ Site de uma loja virtual de doces artesanais, desenvolvido em **React** com comp
 
 Tecnologias: React + Vite, Bootstrap, React Router, Axios, Node.js, Express, Sequelize e MySQL.
 
-![Prévia do site](https://raw.githubusercontent.com/LuizKawanooo/tarefaMario/main/docs/previa-site.png)
-
 ## O que foi desenvolvido
 
 ### Site da loja
