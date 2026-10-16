@@ -1,7 +1,12 @@
 const { Sequelize } = require("sequelize");
+const fs = require("fs");
+const path = require("path");
 
-// Lê os dados de acesso do arquivo .env (fica fora do GitHub)
-process.loadEnvFile();
+// No computador lê os dados do arquivo .env; na Vercel eles vêm das variáveis de ambiente
+const arquivoEnv = path.join(__dirname, ".env");
+if (fs.existsSync(arquivoEnv)) {
+    process.loadEnvFile(arquivoEnv);
+}
 
 const sequelize = new Sequelize(
     process.env.DB_NAME,
@@ -10,7 +15,8 @@ const sequelize = new Sequelize(
     {
         host: process.env.DB_HOST,
         port: 3306,
-        dialect: "mysql"
+        dialect: "mysql",
+        dialectModule: require("mysql2")
     }
 );
 

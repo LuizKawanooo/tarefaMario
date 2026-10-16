@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import API from "../api";
 
 function GerenciarProdutos() {
 
     const [produtos, setProdutos] = useState([]);
 
     function listar() {
-        axios.get("http://localhost:3000/produtos")
+        axios.get(API + "/produtos")
             .then(res => setProdutos(res.data));
     }
 
     function excluir(id) {
-        axios.delete("http://localhost:3000/produtos/" + id)
+        axios.delete(API + "/produtos/" + id)
             .then(() => listar());
     }
 

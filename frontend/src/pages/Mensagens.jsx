@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import API from "../api";
 
 function Mensagens() {
 
     const [mensagens, setMensagens] = useState([]);
 
     function listar() {
-        axios.get("http://localhost:3000/contatos")
+        axios.get(API + "/contatos")
             .then(res => setMensagens(res.data));
     }
 
     function excluir(id) {
-        axios.delete("http://localhost:3000/contatos/" + id)
+        axios.delete(API + "/contatos/" + id)
             .then(() => listar());
     }
 

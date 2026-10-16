@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import API from "../api";
 
 function Contato() {
     const [nome, setNome] = useState("");
@@ -8,7 +9,7 @@ function Contato() {
     function enviar() {
         const contato = { nome, mensagem };
 
-        axios.post("http://localhost:3000/contatos", contato)
+        axios.post(API + "/contatos", contato)
             .then(() => {
                 alert("Obrigado, " + nome + "! Sua mensagem foi enviada.");
                 setNome("");

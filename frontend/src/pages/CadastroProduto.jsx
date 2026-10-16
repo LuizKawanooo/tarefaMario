@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import API from "../api";
 
 function CadastroProduto() {
 
@@ -14,7 +15,7 @@ function CadastroProduto() {
     const [categorias, setCategorias] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:3000/categorias")
+        axios.get(API + "/categorias")
             .then(res => setCategorias(res.data));
     }, []);
 
@@ -27,7 +28,7 @@ function CadastroProduto() {
             categoria_id: categoriaId
         };
 
-        axios.post("http://localhost:3000/produtos", produto)
+        axios.post(API + "/produtos", produto)
             .then(() => navigate("/gerenciar/produtos"));
     }
 

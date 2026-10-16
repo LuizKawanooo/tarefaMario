@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
 import axios from "axios";
+import API from "../api";
 
 function EditarProduto() {
 
@@ -18,7 +19,7 @@ function EditarProduto() {
     const [categorias, setCategorias] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:3000/categorias")
+        axios.get(API + "/categorias")
             .then(res => setCategorias(res.data));
     }, []);
 
@@ -31,7 +32,7 @@ function EditarProduto() {
             categoria_id: categoriaId
         };
 
-        axios.put("http://localhost:3000/produtos/" + id, dados)
+        axios.put(API + "/produtos/" + id, dados)
             .then(() => navigate("/gerenciar/produtos"));
     }
 

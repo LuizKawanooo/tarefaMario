@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams, useLocation, Link } from "react-router-dom";
 import axios from "axios";
+import API from "../api";
 
 function CadastroCategoria() {
 
@@ -18,10 +19,10 @@ function CadastroCategoria() {
         const dados = { nome };
 
         if (id) {
-            axios.put("http://localhost:3000/categorias/" + id, dados)
+            axios.put(API + "/categorias/" + id, dados)
                 .then(() => navigate("/gerenciar/categorias"));
         } else {
-            axios.post("http://localhost:3000/categorias", dados)
+            axios.post(API + "/categorias", dados)
                 .then(() => navigate("/gerenciar/categorias"));
         }
     }

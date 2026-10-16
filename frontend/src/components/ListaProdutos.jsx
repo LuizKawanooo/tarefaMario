@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CardProduto from "./CardProduto";
+import API from "../api";
 
 function ListaProdutos() {
     const [produtos, setProdutos] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:3000/produtos")
+        axios.get(API + "/produtos")
             .then(res => setProdutos(res.data));
     }, []);
 

@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import API from "../api";
 
 function Categorias() {
 
     const [categorias, setCategorias] = useState([]);
 
     function listar() {
-        axios.get("http://localhost:3000/categorias")
+        axios.get(API + "/categorias")
             .then(res => setCategorias(res.data));
     }
 
     function excluir(id) {
-        axios.delete("http://localhost:3000/categorias/" + id)
+        axios.delete(API + "/categorias/" + id)
             .then(() => listar());
     }
 
