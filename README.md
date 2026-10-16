@@ -1,8 +1,14 @@
-# Doce Sabor — Loja Virtual
+# Doce Doces e Sabor — Loja Virtual
 
 Site de uma loja virtual de doces artesanais, desenvolvido em **React** com componentes separados e reutilizáveis, ligado a um **backend em Node.js** que guarda os dados em um banco **MySQL** hospedado.
 
 Tecnologias: React + Vite, Bootstrap, React Router, Axios, Node.js, Express, Sequelize e MySQL.
+
+![Prévia do menu](https://github.com/LuizKawanooo/tarefaMario/blob/97f9e706cde673f823caa9854af6963110fdf37a/pre1.png)
+
+
+![Prévia do menu](https://github.com/LuizKawanooo/tarefaMario/blob/97f9e706cde673f823caa9854af6963110fdf37a/pre2.png)
+
 
 ## O que foi desenvolvido
 
@@ -66,8 +72,6 @@ O layout é responsivo e funciona no computador e no celular.
 ## Imagens
 
 Imagens usadas no site. Juntas, elas formam o menu assim:
-
-![Prévia do menu](https://raw.githubusercontent.com/LuizKawanooo/tarefaMario/main/docs/previa-menu.svg)
 
 | Imagem | Arquivo | Onde é usada |
 |---|---|---|
