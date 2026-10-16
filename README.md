@@ -1,192 +1,101 @@
-# Doce Sabor — Loja Virtual (MySQL + Node + Sequelize + React)
+# Doce Sabor — Loja Virtual
 
-Fluxo: MySQL → Model → Controller → Router → React
+Site de uma loja virtual de doces artesanais, desenvolvido em **React** com componentes separados e reutilizáveis, ligado a um **backend em Node.js** que guarda os dados em um banco **MySQL** hospedado.
 
-Relacionamento:
+Tecnologias: React + Vite, Bootstrap, React Router, Axios, Node.js, Express, Sequelize e MySQL.
+
+![Prévia do site](https://raw.githubusercontent.com/LuizKawanooo/tarefaMario/main/docs/previa-site.png)
+
+## O que foi desenvolvido
+
+### Site da loja
+
+- **Página inicial** com Header, Banner, lista de produtos, seção Sobre e Footer.
+- **Vitrine de produtos** com 7 produtos vindos do banco de dados, cada um com nome, imagem, preço, categoria e botão "Comprar".
+- **Página de contato** com formulário; a mensagem enviada fica salva no banco.
+
+### Área de gerenciamento
+
+Além da loja, foi criada uma área para administrar o conteúdo do site sem mexer no código:
+
+- **Categorias:** cadastrar, listar, editar e excluir. O mesmo formulário é usado para cadastrar e editar.
+- **Produtos:** cadastrar, listar, editar e excluir, escolhendo a categoria em uma lista.
+- **Mensagens:** ver e excluir as mensagens enviadas pela página de contato.
+
+### Banco de dados
+
+Três tabelas no MySQL:
+
+- **categoria:** Doces, Bolos e Tortas.
+- **produto:** nome, preço, imagem e a categoria a que pertence.
+- **contato:** mensagens enviadas pelo site.
+
+As tabelas `categoria` e `produto` têm um relacionamento **1 para N**:
 
 ```
 CATEGORIA 1 ─────── N PRODUTO
 ```
 
-Uma categoria tem vários produtos, e cada produto pertence a uma categoria.
+Uma categoria tem vários produtos, e cada produto pertence a uma categoria. No backend esse relacionamento é feito com `hasMany` e `belongsTo` do Sequelize, e a listagem de produtos usa `include` para trazer junto o nome da categoria.
 
-## Estrutura
+### Backend (API)
 
-```
-loja
-├── banco.sql
-├── atualizar_imagens.sql
-├── backend
-│   ├── controllers
-│   │   ├── categoriaController.js
-│   │   ├── produtoController.js
-│   │   └── contatoController.js
-│   ├── models
-│   │   ├── Categoria.js
-│   │   ├── Produto.js
-│   │   └── Contato.js
-│   ├── routes
-│   │   ├── categoriaRoutes.js
-│   │   ├── produtoRoutes.js
-│   │   └── contatoRoutes.js
-│   ├── .env
-│   ├── database.js
-│   ├── app.js
-│   └── package.json
-└── frontend
-    ├── public
-    │   ├── chocolate.svg
-    │   └── granulado.svg
-    └── src
-        ├── components
-        │   ├── Header.jsx
-        │   ├── Banner.jsx
-        │   ├── CardProduto.jsx
-        │   ├── ListaProdutos.jsx
-        │   ├── Sobre.jsx
-        │   └── Footer.jsx
-        ├── pages
-        │   ├── Home.jsx
-        │   ├── Produtos.jsx
-        │   ├── Contato.jsx
-        │   ├── Painel.jsx
-        │   ├── Categorias.jsx
-        │   ├── CadastroCategoria.jsx
-        │   ├── GerenciarProdutos.jsx
-        │   ├── CadastroProduto.jsx
-        │   ├── EditarProduto.jsx
-        │   └── Mensagens.jsx
-        ├── App.jsx
-        ├── index.css
-        └── main.jsx
-```
-
-## Como rodar
-
-1. **Banco (hospedado no UOL Host):** abra o phpMyAdmin ou o MySQL Workbench conectado no banco
-   `db_mariotask` e execute o `banco.sql`. O banco já existe na hospedagem, então o script só cria as tabelas.
-2. **Backend:** os dados de acesso ao banco ficam no arquivo `backend/.env`
-   (ele não vai para o GitHub; o `.env.example` mostra o formato).
-   ```
-   cd backend
-   npm install
-   npm run dev
-   ```
-   Deve aparecer `Conectado ao banco de dados` e `Servidor rodando na porta 3000`.
-3. **Frontend:** em outro terminal:
-   ```
-   cd frontend
-   npm install
-   npm run dev
-   ```
-   Acesse http://localhost:5173
-
-## Rotas da API (backend)
+Organizado no padrão **Model → Controller → Router**:
 
 | Método | Rota | Função |
 |---|---|---|
-| GET | /categorias | lista categorias |
-| POST | /categorias | cadastra categoria |
-| PUT | /categorias/:id | altera categoria |
-| DELETE | /categorias/:id | exclui categoria |
-| GET | /produtos | lista produtos com a categoria (include) |
-| POST | /produtos | cadastra produto |
-| PUT | /produtos/:id | altera produto |
-| DELETE | /produtos/:id | exclui produto |
-| GET | /contatos | lista mensagens |
-| POST | /contatos | salva mensagem |
+| GET / POST | /categorias | lista e cadastra categorias |
+| PUT / DELETE | /categorias/:id | altera e exclui categoria |
+| GET / POST | /produtos | lista (com a categoria) e cadastra produtos |
+| PUT / DELETE | /produtos/:id | altera e exclui produto |
+| GET / POST | /contatos | lista e salva mensagens |
 | DELETE | /contatos/:id | exclui mensagem |
 
-## Testando no Insomnia
+Os dados de acesso ao banco ficam em um arquivo `.env`, fora do código e fora do GitHub.
 
-**Categoria**
+### Visual
 
-```
-GET    http://localhost:3000/categorias
+Tema inspirado em uma doceria, com cada parte do site em uma cor:
 
-POST   http://localhost:3000/categorias
-{ "nome": "Salgados" }
+- **Menu:** chocolate com granulado e chocolate escorrendo na parte de baixo.
+- **Banner:** parede rosa com um arco verde-sálvia e círculos decorativos.
+- **Produtos:** fundo creme com cards brancos; a cor da imagem muda conforme a categoria.
+- **Sobre:** faixa verde-sálvia.
+- **Rodapé:** chocolate com granulado.
 
-PUT    http://localhost:3000/categorias/4
-{ "nome": "Salgados Especiais" }
+O layout é responsivo e funciona no computador e no celular.
 
-DELETE http://localhost:3000/categorias/4
-```
+## Imagens
 
-**Produto**
+Imagens usadas no site. Juntas, elas formam o menu assim:
 
-```
-GET    http://localhost:3000/produtos
+![Prévia do menu](https://raw.githubusercontent.com/LuizKawanooo/tarefaMario/main/docs/previa-menu.svg)
 
-POST   http://localhost:3000/produtos
-{
-  "nome": "Pudim",
-  "preco": 10.00,
-  "imagem": "https://placehold.co/400x300?text=Pudim",
-  "categoria_id": 1
-}
+| Imagem | Arquivo | Onde é usada |
+|---|---|---|
+| ![Chocolate escorrendo](https://raw.githubusercontent.com/LuizKawanooo/tarefaMario/main/frontend/public/chocolate.svg) | `frontend/public/chocolate.svg` | Chocolate escorrendo embaixo do menu. Feita em SVG e repetida na horizontal com CSS (`repeat-x`). |
+| ![Granulado](https://raw.githubusercontent.com/LuizKawanooo/tarefaMario/main/frontend/public/granulado.svg) | `frontend/public/granulado.svg` | Granulado colorido no fundo do menu e do rodapé, por cima da cor de chocolate. |
 
-PUT    http://localhost:3000/produtos/7
-{
-  "nome": "Pudim de Leite",
-  "preco": 11.00,
-  "imagem": "https://placehold.co/400x300?text=Pudim",
-  "categoria_id": 1
-}
+As imagens dos produtos ficam salvas no banco, na coluna `imagem` da tabela `produto`, como um link:
 
-DELETE http://localhost:3000/produtos/7
-```
+- **Brigadeiro, Beijinho, Brownie, Bolo de Pote, Cupcake e Torta de Limão:** imagens geradas pelo site placehold.co, com a cor de fundo conforme a categoria (rosa para Doces, verde para Bolos e bege para Tortas).
+- **Brigadeirão:** foto do site Docepedia.
 
-**Contato**
-
-```
-POST   http://localhost:3000/contatos
-{ "nome": "Maria", "mensagem": "Vocês fazem encomenda?" }
-```
-
-O `GET /produtos` mostra o relacionamento:
-
-```json
-[
-  {
-    "id": 1,
-    "nome": "Brigadeiro",
-    "preco": "3.50",
-    "imagem": "https://placehold.co/...",
-    "categoria_id": 1,
-    "Categoria": {
-      "id": 1,
-      "nome": "Doces"
-    }
-  }
-]
-```
-
-## Rotas do site (frontend)
-
-| Rota | Página |
-|---|---|
-| / | Home: Banner + ListaProdutos + Sobre |
-| /produtos | Vitrine com os cards dos produtos |
-| /contato | Formulário que salva a mensagem no banco |
-| /gerenciar | Painel com os botões de gerenciamento |
-| /gerenciar/categorias | Lista, edita e exclui categorias |
-| /gerenciar/categorias/novo | Cadastra categoria |
-| /gerenciar/categorias/editar/:id | Edita categoria (reaproveita o formulário de cadastro) |
-| /gerenciar/produtos | Lista, edita e exclui produtos |
-| /gerenciar/produtos/novo | Cadastra produto |
-| /gerenciar/produtos/editar/:id | Edita produto |
-| /gerenciar/mensagens | Mensagens recebidas pelo Contato |
+Para trocar a imagem de um produto, basta editar o link na tela de gerenciar produtos.
 
 ## Componentes
 
 | Componente | Função |
 |---|---|
-| **Header** | Nome da loja e menu com Início, Produtos, Contato e Gerenciar. |
-| **Banner** | Chamada principal da loja com cor de fundo. |
+| **Header** | Nome da loja e menu com Início, Produtos, Contato e Gerenciar. Destaca a página atual. |
+| **Banner** | Chamada principal da loja, com o arco verde sobre o fundo rosa e botões para os produtos e o contato. |
 | **CardProduto** | Componente reutilizável. Recebe `nome`, `imagem`, `preco` e `categoria` por props e mostra o card com o botão "Comprar". |
 | **ListaProdutos** | Busca os produtos no banco com `axios.get` e cria um `CardProduto` para cada um com `map`. |
-| **Sobre** | Texto curto explicando a loja. |
-| **Footer** | Nome do aluno, ano e contatos/redes sociais fictícias. |
+| **Sobre** | Texto explicando a loja e destaques (artesanal, receitas, entrega). |
+| **Footer** | Nome do aluno, ano, contato e redes sociais fictícias. |
 
 O `Header` e o `Footer` ficam no `App.jsx`, fora das `Routes`, então aparecem em todas as páginas.
+
+---
+
+Desenvolvido por Luiz — 2026
