@@ -4,6 +4,12 @@ Site de uma loja virtual de doces artesanais, desenvolvido em **React** com comp
 
 Tecnologias: React + Vite, Bootstrap, React Router, Axios, Node.js, Express, Sequelize e MySQL.
 
+
+![Prévia do menu](https://raw.githubusercontent.com/LuizKawanooo/tarefaMario/main/docs/pre1.png)
+
+
+![Prévia do menu](https://raw.githubusercontent.com/LuizKawanooo/tarefaMario/main/docs/pre2.png)
+
 ## O que foi desenvolvido
 
 ### Site da loja
@@ -66,8 +72,6 @@ O layout é responsivo e funciona no computador e no celular.
 ## Imagens
 
 Imagens usadas no site. Juntas, elas formam o menu assim:
-
-![Prévia do menu](https://raw.githubusercontent.com/LuizKawanooo/tarefaMario/main/docs/previa-menu.svg)
 
 | Imagem | Arquivo | Onde é usada |
 |---|---|---|
